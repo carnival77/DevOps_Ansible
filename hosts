@@ -1,0 +1,7 @@
+[web]
+206.189.125.18 ansible_ssh_pass=tlsehdals1! ansible_ssh_user=root
+157.245.38.187 ansible_ssh_pass=tlsehdals1! ansible_ssh_user=root
+
+[redis]
+157.245.40.187 ansible_ssh_pass=tlsehdals1! ansible_ssh_user=root
+

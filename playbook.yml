@@ -1,0 +1,8 @@
+- hosts: all
+  roles:
+    - redis
+    - result
+    - base
+- hosts: web
+  roles:
+    - deploy

@@ -1,0 +1,9 @@
+-name: run tasks on all hosts
+hosts: "*"
+tasks:
+- name: install php7.2
+  apt:
+    name: php7.2
+    state: present
+    update_cache: true
+  become: true

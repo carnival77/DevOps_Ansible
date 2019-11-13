@@ -1,0 +1,13 @@
+- name: uploading bootstrap file.zip to remote host servers
+  copy:
+    src: /etc/ansible/T-DOP-600_bootstrap_ansible_applications.tar
+    dest: /etc/ansible/BootStrap.tar
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Unarchive a file that is already on the remote machine
+  unarchive:
+    src: /etc/ansible/BootStrap.tar
+    dest: /etc/ansible/BootStrap/
+    remote_src: yes

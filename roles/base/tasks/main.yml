@@ -1,0 +1,10 @@
+- name: install system updates for debian systems
+  apt: upgrade=dist update_cache=yes
+  when: ansible_distribution == "Debian"
+
+- name: Install base packages
+  apt: 
+    name: ['apt-transport-https', 'ca-certificates', 'emacs-nox', 'git', 'curl', 'unzip', 'zsh'] 
+    state: present
+  tags:
+    - packages

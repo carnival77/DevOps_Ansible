@@ -1,0 +1,18 @@
+- name: run tasks on all hosts
+  hosts: "*"
+  tasks:
+  - name: ensure htop is installed
+    apt:
+      name: htop
+      state: present
+      update_cache: true
+    become: true
+- name: run on only web
+  hosts: "web"
+  tasks:
+  - name: ensure nginx is installed
+    apt:
+      name: nginx
+      state: present
+      update_cache: true
+    become: true
