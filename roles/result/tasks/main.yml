@@ -10,8 +10,8 @@
 - name: Create npm global directory
   file:
     path: "{{ npm_config_prefix }}"
-    owner: "{{ nodejs_install_npm_user }}"
-    group: "{{ nodejs_install_npm_user }}"
+    owner: "root"
+    group: "root"
     state: directory
 
 # - name: Add npm_config_prefix bin directory to global $PATH.

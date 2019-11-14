@@ -4,5 +4,5 @@
     - result
     - base
 - hosts: web
-  roles:
+  roles: 
     - deploy

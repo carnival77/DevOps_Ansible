@@ -11,3 +11,45 @@
     src: /etc/ansible/BootStrap.tar
     dest: /etc/ansible/BootStrap/
     remote_src: yes
+
+- name: Install "express" node.js package.
+  npm:
+    name: express
+    path: /etc/ansible/BootStrap/npm_dependency/
+
+- name: Install "redis" node.js package.
+  npm:
+    name: redis
+    path: /etc/ansible/BootStrap/npm_dependency/
+
+- name: uploading bootstrap systemd.service to remote host servers
+  copy:
+    src: /etc/ansible/source/boot.service
+    dest: /etc/systemd/system/my-awesome-app.service
+    owner: root
+    group: root
+    mode: 0777
+
+# - name: enable express service
+#  service: name=express enabled=yes
+
+# - name: enable redis service
+#  service: name=redis enabled=yes
+
+# - name: Make sure express service is running
+#   systemd:
+#     state: started
+#     name: express
+    
+# - name: Make sure redis service is running
+#   systemd:
+#     state: started
+#     name: redis
+
+- name: Template a j2 file to server
+  template:
+    src: /etc/ansible/roles/deploy/templates/boot.j2
+    dest: /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
+    owner: root
+    group: root
+    mode: '0777'
