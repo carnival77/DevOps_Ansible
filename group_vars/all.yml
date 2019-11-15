@@ -1,2 +1,8 @@
 redis_port: "4242"
 redis_host: "{{ hostvars['redis']['ansible_default_ipv4']['address'] }}"
+
+
+POSTGRESQL_HOST: "{{ hostvars['postgres']['ansible_default_ipv4']['address'] }}"
+POSTGRESQL_name: postgresql
+POSTGRESQL_user: paul
+POSTGRESQL_password: democracyIsFragile
