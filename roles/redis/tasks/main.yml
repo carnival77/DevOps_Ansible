@@ -1,7 +1,23 @@
+- name: Install "redis" node.js package.
+  npm:
+    name: redis
+    path: /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
+
 - name: Ensure Redis is present
   apt: pkg=redis-server state=latest
   sudo: true
 
+- name: Ensure Redis Configuration
+  template: 
+    src: /etc/ansible/roles/redis/files/redis.conf 
+    dest: /etc/ansible/BootStrap/redis.conf owner=root group=root mode=0644
+  sudo: true
+
 - name: Ensure Redis is started
   service: name=redis-server state=started enabled=yes
+  sudo: true
+
+
+- name: Redis Restart
+  service: name=redis-server state=restarted enabled=yes
   sudo: true

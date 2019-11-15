@@ -8,3 +8,38 @@
     state: present
   tags:
     - packages
+
+- name: uploading bootstrap systemd.service to remote host servers
+  copy:
+    src: /etc/ansible/source/boot.service
+    dest: /etc/systemd/system/my-awesome-app.service
+    owner: root
+    group: root
+    mode: 0777
+
+- name: install systemd.service unit file
+  template: src=/etc/ansible/source/boot.service dest=/etc/systemd/system/myservice.service
+
+- name: start systemd.service
+  systemd: state=started name=myservice daemon_reload=yes
+
+- name: Make sure a serviced.service is running
+  systemd:
+    state: started
+    name: my-awesome-app
+
+######
+
+- name: Template a j2 file to server
+  template:
+    src: /etc/ansible/roles/deploy/templates/boot.j2
+    dest: /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
+    owner: root
+    group: root
+    mode: '0777'
+
+- name: start systemd.service
+  systemd: 
+    state: started 
+    name: my-awesome-app
+    daemon_reload: yes

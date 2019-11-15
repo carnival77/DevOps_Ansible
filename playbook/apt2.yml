@@ -1,9 +1,0 @@
-- name: run tasks on all hosts
-  hosts: "*"
-  tasks:
-  - name: ensure htop is installed
-    apt:
-      name: htop
-      state: absent
-      update_cache: true
-    become: true

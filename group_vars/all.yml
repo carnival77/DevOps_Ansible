@@ -1,2 +1,2 @@
 redis_port: "4242"
-redis_host: "{{ hostvars['cache-1']['ansible_default_ipv4']['address'] }}"
+redis_host: "{{ hostvars['redis']['ansible_default_ipv4']['address'] }}"

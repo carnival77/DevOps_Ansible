@@ -1,7 +1,0 @@
-- name: run tasks on all hosts
-  hosts: "web"
-  tasks:
-  - name: ensure htop is installed
-    service:
-      name: nginx
-      state: started

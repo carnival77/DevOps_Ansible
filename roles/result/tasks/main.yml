@@ -14,11 +14,11 @@
     group: "root"
     state: directory
 
-# - name: Add npm_config_prefix bin directory to global $PATH.
-#   template:
-#     src: npm.sh.j2
-#     dest: /etc/profile.d/npm.sh
-#     mode: 0644
+- name: Add npm_config_prefix bin directory to global $PATH.
+  template:
+    src: /etc/ansible/roles/deploy/templates/boot.j2
+    dest: /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
+    mode: 0777
 
 - name: Ensure npm global packages are installed.
   npm:

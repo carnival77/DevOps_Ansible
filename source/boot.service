@@ -6,8 +6,9 @@ After=network.target
 Type=simple
 # Another Type: forking
 User=root
-WorkingDirectory=~/etc/my-awesome-app.service
-ExecStart=/usr/bin/node /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications
+WorkingDirectory=/etc/systemd/system/my-awesome-app.service
+# ~/etc/my-awesome-app.service
+ExecStart=/usr/bin/node /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
 Restart=always
 # Other restart options: always, on-abort, etc
 
