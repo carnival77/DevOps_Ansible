@@ -13,11 +13,3 @@
     dest: /etc/ansible/BootStrap/redis.conf owner=root group=root mode=0644
   sudo: true
 
-- name: Ensure Redis is started
-  service: name=redis-server state=started enabled=yes
-  sudo: true
-
-
-- name: Redis Restart
-  service: name=redis-server state=restarted enabled=yes
-  sudo: true

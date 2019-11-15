@@ -3,11 +3,15 @@
     - result
     - base
 
+- hosts: postgresql
+  roles:
+    - postgresql
+
+
 - hosts: web
   roles: 
     - deploy
-  user: root
-  
+
 - hosts: redis
   roles:
     - redis
