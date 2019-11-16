@@ -1,0 +1,15 @@
+[Unit]
+
+Description=My Webapp Java REST Service
+
+[Service]
+WorkingDirectory=/etc/bin/worker/src/main/java/worker
+
+ExecStart=/etc/bin/worker/src/main/java/worker/Worker.java
+
+Restart=on-failure
+
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

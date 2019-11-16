@@ -33,4 +33,10 @@
     chdir: /etc/bin/poll
 
 
-- name: send the poll service redis server
+- name: Make sure a service is running
+  systemd:
+    state: started
+    name: poll.service
+
+- name: send data to redis
+#there is a return and we have to send it to another server

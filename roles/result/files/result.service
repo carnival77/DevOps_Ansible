@@ -1,4 +1,23 @@
 ---
+[Unit]
+Description=Result service
+After=multi.user.target
+Conflicts=getty@tty1.Service
+
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/bin/result/views/app.js
+StandardInput=tty-force
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
+
 # Set the version of Node.js to install ("6.x", "8.x", "10.x", "11.x", etc.).
 # Version numbers from Nodesource: https://github.com/nodesource/distributions
 nodejs_version: "10.x"
@@ -25,3 +44,4 @@ nodejs_npm_global_packages: []
 
 # The path of a package.json file used to install packages globally.
 nodejs_package_json_path: ""
+

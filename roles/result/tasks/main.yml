@@ -14,11 +14,11 @@
     group: "root"
     state: directory
 
-- name: Add npm_config_prefix bin directory to global $PATH.
-  template:
-    src: /etc/ansible/roles/deploy/templates/boot.j2
-    dest: /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
-    mode: 0777
+#- name: Add npm_config_prefix bin directory to global $PATH.
+#  template:
+#    src: /etc/ansible/roles/deploy/templates/boot.j2
+#    dest: /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
+#    mode: 0777
 
 - name: Ensure npm global packages are installed.
   npm:
@@ -26,6 +26,7 @@
     version: "{{ item.version | default('latest') }}"
     global: true
     state: latest
+
   environment:
     NPM_CONFIG_PREFIX: "{{ npm_config_prefix }}"
     NODE_PATH: "{{ npm_config_prefix }}/lib/node_modules"
@@ -37,3 +38,33 @@
   npm:
     path: "{{ nodejs_package_json_path }}"
   when: nodejs_package_json_path is defined and nodejs_package_json_path
+
+  - name: upload result service (from the postgresql to the result server)
+
+
+#  - name: install dependency
+  - name: get data from postgresql
+    postgresql_db:
+      name:
+      login_host: root
+      # Needs to check whether it is right
+      login_user: {{POSTGRESQL_user}}
+      login_password: {{POSTGRESQL_password}}
+      port: 5432
+      state: dump
+      target: 
+      # I need to know where the data base is
+
+
+  - name: run the program (by service file)
+    systemd:
+      state: started
+      name: poll.service
+#  - name: Install packages based on package.json.
+#  npm:
+#    path: /app/location
+#
+#- name: Update packages based on package.json to their latest version.
+#  npm:
+#    path: /app/location
+#    state: latest

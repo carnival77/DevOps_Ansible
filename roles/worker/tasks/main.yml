@@ -1,0 +1,74 @@
+---
+#install redis for maybe
+- name: Install "redis" node.js package.
+  npm:
+    name: redis
+    path: /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
+
+- name: Ensure Redis is present
+  apt: pkg=redis-server state=latest
+  sudo: true
+
+- name: Ensure Redis Configuration
+  template: 
+    src: /etc/ansible/roles/redis/files/redis.conf 
+    dest: /etc/ansible/BootStrap/redis.conf owner=root group=root mode=0644
+  sudo: true
+
+
+
+- name: copy the file of the host
+  copy:
+    src: {{playbook_dir}}/worker.tar
+    dest: /etc/bin
+
+- name: unarhive the file
+  unarchive:
+    src: /etc/bin/worker.tar
+    dest: /etc/bin
+    remote_src: yes
+
+
+#- name: Add Oracle Java PPA
+#  apt_repository:
+#    repo: ppa:webupd8team/java
+#    state: present
+
+#- name: Install Java 8
+#  apt:
+#    name: oracle-java8-installer
+#    update_cache: yes
+
+get_url:
+  url: http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm
+  dest: /opt/jre-8u60-linux-x64.rpm
+  headers: 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
+
+- name: install Java JRE rpm from a local file
+  yum:
+    name: /opt/jre-8u60-linux-x64.rpm
+    state: present
+
+- name: Download Java JDK
+  get_url:
+    url: http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm
+    dest: /opt/jdk-8u60-linux-x64.rpm
+    headers: 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
+
+- name: Install Java JDK rpm from a local file
+  yum:
+    name: /opt/jdk-8u60-linux-x64.rpmstate: present
+
+#- name: it saids to build, but I don't know the necessity yet
+
+- name: get data from redis
+
+
+- name: Make sure a service is running
+  systemd:
+    state: started
+    name: poll.service
+
+
+- name: send data to postgresql
+# This part is also undone

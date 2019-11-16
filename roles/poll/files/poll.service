@@ -1,0 +1,12 @@
+[Unit]
+Description=Poll Service
+After=multi.user.target
+Conflicts=getty@tty1.Service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 etc/bin/poll/app.py
+StandardInput=tty-force
+
+[Install]
+WantedBy=multi-user.target
