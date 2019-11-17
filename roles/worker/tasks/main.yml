@@ -23,7 +23,6 @@
     dest: /etc/bin/
     remote_src: yes
 
-
 #- name: Add Oracle Java PPA
 #  apt_repository:
 #    repo: ppa:webupd8team/java
