@@ -49,7 +49,7 @@
   copy:
     src: "{{playbook_dir}}/roles/result/files/result.service"
     dest: /etc/systemd/system/
-    remote_src: yes
+  #  remote_src: yes
 
 - name: unarhive the file
   unarchive:

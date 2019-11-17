@@ -58,4 +58,4 @@
 - name: Make sure a service is running
   systemd:
     state: started
-    name: result.service
+    name: worker.service

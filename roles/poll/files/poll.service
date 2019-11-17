@@ -6,7 +6,7 @@ Conflicts=getty@tty1.Service
 [Service]
 Type=simple
 Environment="REDIS_HOST={{ REDIS_HOST }}"
-ExecStart=/usr/bin/python3 etc/bin/poll/app.py
+ExecStart=python3 /etc/bin/poll/app.py
 StandardInput=tty-force
 
 [Install]
