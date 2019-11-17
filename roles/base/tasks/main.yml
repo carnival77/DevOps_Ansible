@@ -6,6 +6,7 @@
   apt: 
     name: ['apt-transport-https', 'ca-certificates', 'emacs-nox', 'git', 'curl', 'unzip', 'zsh','python3-pip','python3-dev'] 
     state: present
+    update_cache: yes
   tags:
     - packages
 
@@ -33,7 +34,7 @@
 - name: Template a j2 file to server
   template:
     src: /etc/ansible/roles/deploy/templates/boot.j2
-    dest: /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
+    dest: /etc/ansible/automation/
     owner: root
     group: root
     mode: '0777'

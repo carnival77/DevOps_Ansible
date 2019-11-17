@@ -1,4 +1,11 @@
 ---
+# install maven
+- name: install maven (and other packages if needed)
+  become: yes
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  with_items:
+    - maven
+
 #install redis for maybe
 - name: Install "redis" node.js package.
   npm:
@@ -17,12 +24,12 @@
 
 - name: copy tar of the host
   copy:
-    src: {{playbook_dir}}/worker.tar
+    src: "{{playbook_dir}}"/worker.tar
     dest: /etc/bin
 
 - name: copy the service file of the host
   copy:
-    src: {{playbook_dir}}/roles/worker/files/worker.service
+    src: "{{playbook_dir}}"/roles/worker/files/worker.service
     dest: /etc/bin
 
 

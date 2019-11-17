@@ -34,13 +34,16 @@
   with_items: "{{ nodejs_npm_global_packages }}"
   tags: ['skip_ansible_lint']
 
+## is it necessary?
 - name: Install packages defined in a given package.json.
   npm:
     path: "{{ nodejs_package_json_path }}"
   when: nodejs_package_json_path is defined and nodejs_package_json_path
 
   - name: upload result service (from the postgresql to the result server)
+##
 
+<<<<<<< HEAD
 - name: copy the file of the host
   copy:
     src: {{playbook_dir}}/result.tar
@@ -58,12 +61,27 @@
     dest: /etc/bin
     remote_src: yes
 
+=======
+- name: get data from postgresql
+  postgresql_db:
+    name:
+    login_host: root
+    # Needs to check whether it is right
+    login_user: {{POSTGRESQL_USER}}
+    login_password: {{POSTGRESQL_PASSWORD}}
+    port: 80
+    state: dump
+    target: 
+    # I need to know where the data base is
 
 
-  - name: run the program (by service file)
-    systemd:
-      state: started
-      name: poll.service
+- name: run the program (by service file)
+  systemd:
+    state: started
+    name: poll.service
+>>>>>>> c9596e122dc71d7d2295c7f1135f4c569a787f26
+
+
 #  - name: Install packages based on package.json.
 #  npm:
 #    path: /app/location
