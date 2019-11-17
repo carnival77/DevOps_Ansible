@@ -9,7 +9,7 @@ Environment=POSTGRESQL_PASSWORD="{{ POSTGRESQL_PASSWORD }}"
 Environment=POSTGRESQL_HOST="{{ POSTGRESQL_HOST }}"
 Environment=POSTGRESQL_PORT="{{ POSTGRESQL_PORT }}"
 Environment=POSTGRESQL_DB="{{ POSTGRESQL_DB }}"
-ExecStart=java -jar /etc/bin/worker/target/worker-jar-with-dependencies.jar
+ExecStart=/usr/bin/java -jar /etc/bin/worker/target/worker-jar-with-dependencies.jar
 Restart=on-failure
 
 RestartSec=5

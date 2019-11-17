@@ -7,6 +7,9 @@
 - hosts: redis
   roles:
     - redis
+  vars:
+    redis_port: 80
+    redis_databases: 1
 
 - hosts: postgresql
   roles:

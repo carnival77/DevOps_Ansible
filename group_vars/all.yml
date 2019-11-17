@@ -1,4 +1,4 @@
-REDIS_PORT: 80
+REDIS_PORT: "80"
 REDIS_HOST: "{{ hostvars['redis']['ansible_default_ipv4']['address'] }}"
 
 
@@ -7,4 +7,4 @@ POSTGRESQL_NAME: postgresql
 POSTGRESQL_USER: "paul"
 POSTGRESQL_DB: "paul"
 POSTGRESQL_PASSWORD: democracyIsFragile
-POSTGRESQL_PORT: 5432
+POSTGRESQL_PORT: "5432"

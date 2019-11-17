@@ -1,18 +1,62 @@
----
-- import_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+# ---
 
-- name: Define nodejs_install_npm_user
-  set_fact:
-    nodejs_install_npm_user: "{{ ansible_user | default(lookup('env', 'USER')) }}"
-  when: nodejs_install_npm_user is not defined
+- name: nodejs - add repository key
+  apt_key:
+    url: "{{ item }}"
+  with_items:
+    - "http://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    - "https://dl.yarnpkg.com/debian/pubkey.gpg"
 
-- name: Create npm global directory
-  file:
-    path: "{{ npm_config_prefix }}"
-    owner: "root"
-    group: "root"
-    state: directory
+- name: nodejs - add repository
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - "deb http://deb.nodesource.com/node_10.x {{ ansible_lsb.codename }} main"
+    - "deb-src http://deb.nodesource.com/node_10.x {{ ansible_lsb.codename }} main"
+    - "deb https://dl.yarnpkg.com/debian/ stable main"
+
+- name: nodejs - install
+  apt:
+    name: "{{ item }}"
+    state: "present"
+  with_items:
+    - "nodejs"
+    - "yarn"
+
+#
+# Fix bug, which prevent building native node modules on Vagrant NFS mount
+#
+# @see:
+# https://github.com/nodejs/node-gyp/issues/562
+# https://github.com/npm/npm/issues/3565#issuecomment-202473011
+#
+# solution:
+# /usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/make.py
+# search: copy_archive_arguments = '-af'
+# replace: copy_archive_arguments = '-PRf'
+#
+- name: nodejs - fix, operation not permitted
+  replace:
+    dest: "/usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/make.py"
+    regexp: "copy_archive_arguments = '-af'"
+    replace: "copy_archive_arguments = '-PRf'"
+    backup: "yes"
+# - import_tasks: setup-Debian.yml
+#   when: ansible_os_family == 'Debian'
+
+# - name: Define nodejs_install_npm_user
+#   set_fact:
+#     nodejs_install_npm_user: "{{ ansible_user | default(lookup('env', 'USER')) }}"
+#   when: nodejs_install_npm_user is not defined
+
+# - name: Create npm global directory
+#   file:
+#     path: "{{ npm_config_prefix }}"
+#     owner: "root"
+#     group: "root"
+#     state: directory
 
 #- name: Add npm_config_prefix bin directory to global $PATH.
 #  template:
