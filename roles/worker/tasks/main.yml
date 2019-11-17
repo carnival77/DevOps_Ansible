@@ -24,12 +24,12 @@
 
 - name: copy tar of the host
   copy:
-    src: "{{playbook_dir}}"/worker.tar
+    src: "{{playbook_dir}}/worker.tar"
     dest: /etc/bin
 
 - name: copy the service file of the host
   copy:
-    src: "{{playbook_dir}}"/roles/worker/files/worker.service
+    src: "{{playbook_dir}}/roles/worker/files/worker.service"
     dest: /etc/bin
 
 

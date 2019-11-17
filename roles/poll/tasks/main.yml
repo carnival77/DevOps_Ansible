@@ -15,12 +15,12 @@
 
 - name: copy the file of the host
   copy:
-    src: /poll.tar
+    src: "{{playbook_dir}}/poll.tar"
     dest: /etc/bin
 
 - name: copy service file to the server
   copy:
-    src: /roles/poll/files/poll.service
+    src: "{{playbook_dir}}/roles/poll/files/poll.service"
     dest: /etc/bin
     remote_src: yes
 
