@@ -5,10 +5,10 @@
 
 - name: Ensure Redis is present
   apt: pkg=redis-server state=latest
-  sudo: true
+  become: yes
 
 - name: Ensure Redis Configuration
   template: 
     src: "{{playbook_dir}}/roles/redis/files/redis.conf"
     dest: "{{playbook_dir}}/etc/bin/redis.conf owner=root group=root mode=0777"
-  sudo: true
+  become: yes
