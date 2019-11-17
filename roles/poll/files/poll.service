@@ -5,9 +5,11 @@ Conflicts=getty@tty1.Service
 
 [Service]
 Type=simple
-Environment
-ExecStart=/usr/bin/python3 etc/bin/poll/app.py
+Environment="REDIS_HOST={{ REDIS_HOST }}"
+WorkingDirectory=/etc/systemd/system/poll.service
+ExecStart=/usr/bin/python3 /etc/bin/poll/app.py
 StandardInput=tty-force
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

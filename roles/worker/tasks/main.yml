@@ -1,11 +1,4 @@
 ---
-# install maven
-- name: install maven (and other packages if needed)
-  become: yes
-  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
-  with_items:
-    - maven
-
 - name: copy tar of the host
   copy:
     src: "{{playbook_dir}}/worker.tar"
@@ -14,7 +7,7 @@
 - name: copy the service file of the host
   copy:
     src: "{{playbook_dir}}/roles/worker/files/worker.service"
-    dest: /etc/bin/
+    dest: /etc/systemd/system/
 
 
 - name: unarhive the file
@@ -23,40 +16,46 @@
     dest: /etc/bin/
     remote_src: yes
 
-#- name: Add Oracle Java PPA
-#  apt_repository:
-#    repo: ppa:webupd8team/java
-#    state: present
+# - name: install java
+#   get_url:
+#     url: http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm
+#     dest: /opt/jre-8u60-linux-x64.rpm
+#     headers: 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
 
-#- name: Install Java 8
-#  apt:
-#    name: oracle-java8-installer
-#    update_cache: yes
+# - name: install Java JRE rpm from a local file
+#   yum:
+#     name: /opt/jre-8u60-linux-x64.rpm
+#     state: present
 
-- name: install java
-  get_url:
-    url: http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm
-    dest: /opt/jre-8u60-linux-x64.rpm
-    headers: 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
+# - name: Download Java JDK
+#   get_url:
+#     url: http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm
+#     dest: /opt/jdk-8u60-linux-x64.rpm
+#     headers: 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
 
-- name: install Java JRE rpm from a local file
-  yum:
-    name: /opt/jre-8u60-linux-x64.rpm
-    state: present
+# - name: Install Java JDK rpm from a local file
+#   yum:
+#     name: /opt/jdk-8u60-linux-x64.rpm
+#     state: present
 
-- name: Download Java JDK
-  get_url:
-    url: http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm
-    dest: /opt/jdk-8u60-linux-x64.rpm
-    headers: 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
+# install maven
+- name: install maven (and other packages if needed)
+  become: yes
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  with_items:
+    - maven
 
-- name: Install Java JDK rpm from a local file
-  yum:
-    name: /opt/jdk-8u60-linux-x64.rpm
-    state: present
+- name: mvn dependency resolve
+  shell: mvn dependency:resolve
+  args:
+    chdir: /etc/bin/worker/
 
-
+- name: mvn package.
+  shell: mvn package
+  args:
+    chdir: /etc/bin/worker/
+  
 - name: Make sure a service is running
   systemd:
     state: started
-    name: result.service
+    name: worker.service

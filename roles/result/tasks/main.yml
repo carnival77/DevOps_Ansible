@@ -48,8 +48,8 @@
 - name: copy service file to the server
   copy:
     src: "{{playbook_dir}}/roles/result/files/result.service"
-    dest: /etc/bin/
-    remote_src: yes
+    dest: /etc/systemd/system/
+  #  remote_src: yes
 
 - name: unarhive the file
   unarchive:

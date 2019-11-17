@@ -1,10 +1,25 @@
+- name: Install "redis" 
+  apt:
+    name: redis
+
+- name: Install "redis-server" 
+  apt:
+    name: redis-server
 
 - name: Ensure Redis is present
   apt: pkg=redis-server state=latest
   become: yes
 
+- name: Redis-server start
+  service: name=redis-server state=started enabled=yes
+  become: yes
+
+- name: Redis-server Restart
+  service: name=redis-server state=restarted enabled=yes
+  become: yes
+
 - name: Ensure Redis Configuration
   template: 
     src: "{{playbook_dir}}/roles/redis/files/redis.conf"
-    dest: "{{playbook_dir}}/etc/bin/redis.conf owner=root group=root mode=0777"
+    dest: "/etc/bin/redis.conf owner=root group=root mode=0777"
   become: yes
