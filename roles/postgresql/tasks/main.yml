@@ -1,8 +1,9 @@
+
 - name: import the postgresql apt key
   apt_key:
     url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
     state: present
-  sudo: yes
+  become: yes
 
 - name: Ensure bash, OpenSSl, and libssl, python-psycopg2 are the latest versions
   apt: name= {{ item }} update_cache=true state=latest
@@ -35,7 +36,7 @@
 
 - name: Add Postgres repo to sources list
   apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main' state=present
-  sudo: yes
+  become: yes
 
 - name: Install PostgreSQL
   apt: name= {{ item }} update_cache=true state=installed

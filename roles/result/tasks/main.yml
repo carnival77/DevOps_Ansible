@@ -40,18 +40,15 @@
     path: "{{ nodejs_package_json_path }}"
   when: nodejs_package_json_path is defined and nodejs_package_json_path
 
-  - name: upload result service (from the postgresql to the result server)
-##
-
 - name: copy the file of the host
   copy:
-    src: {{playbook_dir}}/result.tar
+    src: "{{playbook_dir}}/result.tar"
     dest: /etc/bin/
 
 - name: copy service file to the server
   copy:
-    src: {{playbook_dir}}/roles/result/files/result.service
-    dest: /etc/bin/
+    src: "{{playbook_dir}}/roles/result/files/result.service"
+    dest: /etc/systemd/system/
     remote_src: yes
 
 - name: unarhive the file

@@ -1,11 +1,4 @@
 ---
-# install maven
-- name: install maven (and other packages if needed)
-  become: yes
-  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
-  with_items:
-    - maven
-
 - name: copy tar of the host
   copy:
     src: "{{playbook_dir}}/worker.tar"
@@ -14,7 +7,7 @@
 - name: copy the service file of the host
   copy:
     src: "{{playbook_dir}}/roles/worker/files/worker.service"
-    dest: /etc/bin/
+    dest: /etc/systemd/system/
 
 
 - name: unarhive the file
@@ -22,16 +15,6 @@
     src: /etc/bin/worker.tar
     dest: /etc/bin/
     remote_src: yes
-
-#- name: Add Oracle Java PPA
-#  apt_repository:
-#    repo: ppa:webupd8team/java
-#    state: present
-
-#- name: Install Java 8
-#  apt:
-#    name: oracle-java8-installer
-#    update_cache: yes
 
 - name: install java
   get_url:
@@ -55,7 +38,19 @@
     name: /opt/jdk-8u60-linux-x64.rpm
     state: present
 
+# install maven
+- name: install maven (and other packages if needed)
+  become: yes
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  with_items:
+    - maven
 
+- name: mvn dependency resolve
+  shell:
+
+- name: mvn package.
+  shell:
+  
 - name: Make sure a service is running
   systemd:
     state: started

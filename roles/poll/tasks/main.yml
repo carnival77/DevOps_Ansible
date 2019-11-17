@@ -21,7 +21,7 @@
 - name: copy service file to the server
   copy:
     src: "{{playbook_dir}}/roles/poll/files/poll.service"
-    dest: /etc/bin/
+    dest: /etc/systemd/system/
     remote_src: yes
 
 - name: unarhive the file
