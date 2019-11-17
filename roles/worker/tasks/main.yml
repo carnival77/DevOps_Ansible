@@ -6,22 +6,6 @@
   with_items:
     - maven
 
-#install redis for maybe
-- name: Install "redis" node.js package.
-  npm:
-    name: redis
-    path: /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
-
-- name: Ensure Redis is present
-  apt: pkg=redis-server state=latest
-  sudo: true
-
-- name: Ensure Redis Configuration
-  template: 
-    src: /etc/ansible/roles/redis/files/redis.conf 
-    dest: /etc/ansible/BootStrap/redis.conf owner=root group=root mode=0644
-  sudo: true
-
 - name: copy tar of the host
   copy:
     src: "{{playbook_dir}}/worker.tar"

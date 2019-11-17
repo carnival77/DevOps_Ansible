@@ -42,17 +42,3 @@
 #   systemd:
 #     state: started
 #     name: redis
-
-- name: Template a j2 file to server
-  template:
-    src: /etc/ansible/roles/deploy/templates/boot.j2
-    dest: /etc/ansible/BootStrap/T-DOP-600_bootstrap_ansible_applications/
-    owner: root
-    group: root
-    mode: '0777'
-
-- name: start systemd.service
-  systemd: 
-    state: started 
-    name: my-awesome-app
-    daemon_reload: yes
