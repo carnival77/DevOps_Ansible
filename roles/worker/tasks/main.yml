@@ -52,18 +52,11 @@
 
 - name: Install Java JDK rpm from a local file
   yum:
-    name: /opt/jdk-8u60-linux-x64.rpmstate: present
-
-#- name: it saids to build, but I don't know the necessity yet
-
-- name: get data from redis
+    name: /opt/jdk-8u60-linux-x64.rpm
+    state: present
 
 
 - name: Make sure a service is running
   systemd:
     state: started
     name: result.service
-
-
-- name: send data to postgresql
-# This part is also undone
