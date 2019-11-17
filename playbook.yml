@@ -2,17 +2,11 @@
 
 - hosts: all
   roles:
-    - result
     - base
-
-- hosts: postgresql
-  roles:
-    - postgresql
-
 
 - hosts: web
   roles: 
-    - deploy
+    - poll
 
 - hosts: redis
   roles:
@@ -20,3 +14,15 @@
   vars:
     redis_port: 4242
     redis_databases: 1
+
+- hosts: worker
+  roles:
+    - worker
+
+- hosts: postgresql
+  roles:
+    - postgresql
+
+- hosts: web
+  roles: 
+    - result
