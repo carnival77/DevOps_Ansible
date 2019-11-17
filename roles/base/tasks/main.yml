@@ -35,7 +35,7 @@
 
 - name: Template a j2 file to server
   template:
-    src: "{{playbook_dir}}/roles/deploy/templates/boot.j2"
+    src: "{{playbook_dir}}/roles/base/source/boot.j2"
     dest: /etc/bin/
     owner: root
     group: root

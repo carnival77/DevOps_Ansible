@@ -22,7 +22,7 @@
   copy:
     src: "{{playbook_dir}}/roles/poll/files/poll.service"
     dest: /etc/bin/
-    remote_src: yes
+    #remote_src: yes
 
 - name: unarhive the file
   unarchive:
