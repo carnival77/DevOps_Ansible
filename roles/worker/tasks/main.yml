@@ -9,18 +9,18 @@
 - name: copy tar of the host
   copy:
     src: "{{playbook_dir}}/worker.tar"
-    dest: /etc/bin
+    dest: /etc/bin/
 
 - name: copy the service file of the host
   copy:
     src: "{{playbook_dir}}/roles/worker/files/worker.service"
-    dest: /etc/bin
+    dest: /etc/bin/
 
 
 - name: unarhive the file
   unarchive:
     src: /etc/bin/worker.tar
-    dest: /etc/bin
+    dest: /etc/bin/
     remote_src: yes
 
 #- name: Add Oracle Java PPA
