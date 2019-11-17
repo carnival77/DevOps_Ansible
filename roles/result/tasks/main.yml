@@ -41,19 +41,23 @@
 
   - name: upload result service (from the postgresql to the result server)
 
+- name: copy the file of the host
+  copy:
+    src: {{playbook_dir}}/result.tar
+    dest: /etc/bin
 
-#  - name: install dependency
-  - name: get data from postgresql
-    postgresql_db:
-      name:
-      login_host: root
-      # Needs to check whether it is right
-      login_user: {{POSTGRESQL_user}}
-      login_password: {{POSTGRESQL_password}}
-      port: 5432
-      state: dump
-      target: 
-      # I need to know where the data base is
+- name: copy service file to the server
+  copy:
+    src: {{playbook_dir}}/roles/result/files/result.service
+    dest: /etc/bin
+    remote_src: yes
+
+- name: unarhive the file
+  unarchive:
+    src: /etc/bin/result.tar
+    dest: /etc/bin
+    remote_src: yes
+
 
 
   - name: run the program (by service file)

@@ -7,7 +7,7 @@ Conflicts=getty@tty1.Service
 [Service]
 User=root
 Type=simple
-ExecStart=/usr/bin/result/views/app.js
+ExecStart=/usr/bin/result/server.js
 StandardInput=tty-force
 
 [Install]

@@ -15,12 +15,16 @@
     dest: /etc/ansible/BootStrap/redis.conf owner=root group=root mode=0644
   sudo: true
 
-
-
-- name: copy the file of the host
+- name: copy tar of the host
   copy:
     src: {{playbook_dir}}/worker.tar
     dest: /etc/bin
+
+- name: copy the service file of the host
+  copy:
+    src: {{playbook_dir}}/roles/worker/files/worker.service
+    dest: /etc/bin
+
 
 - name: unarhive the file
   unarchive:
@@ -67,7 +71,7 @@ get_url:
 - name: Make sure a service is running
   systemd:
     state: started
-    name: poll.service
+    name: result.service
 
 
 - name: send data to postgresql
