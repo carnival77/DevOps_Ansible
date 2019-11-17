@@ -35,10 +35,19 @@
     executable: pip3
     requirements: /etc/bin/poll/requirements.txt
 
+### evan
 
-- name: Make sure a service is running
+- name: install poll.service unit file
+  template: 
+    src: "{{playbook_dir}}/roles/poll/files/poll.service"
+    dest: /etc/systemd/system/poll.service
+
+- name: start poll.service
+  systemd: state=started name=poll daemon_reload=yes
+
+- name: Make sure a serviced.service is running
   systemd:
     state: started
-    name: poll.service
+    name: poll
 
 #there is a return and we have to send it to another server

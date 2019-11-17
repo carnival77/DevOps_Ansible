@@ -1,18 +1,15 @@
-[all:vars]
-ansible_user=root
-ansible_python_interpreter=/usr/bin/python3
 
 [poll]
-poll
+poll ansible_host=root@poll ansible_ssh_pass=tlsehdals1!
 
 [result]
-result
+result ansible_host=root@result ansible_ssh_pass=tlsehdals1!
 
 [redis]
-redis
+redis ansible_host=root@redis ansible_ssh_pass=tlsehdals1!
 
 [postgresql]
-postgresql
+postgresql ansible_host=root@postgresql ansible_ssh_pass=tlsehdals1!
 
 [worker]
-worker
+worker ansible_host=root@worker ansible_ssh_pass=tlsehdals1!

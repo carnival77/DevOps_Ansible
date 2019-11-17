@@ -1,7 +1,3 @@
-- name: Install "redis" node.js package.
-  npm:
-    name: redis
-    path: "{{playbook_dir}}/etc/bin"
 
 - name: Ensure Redis is present
   apt: pkg=redis-server state=latest
