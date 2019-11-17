@@ -12,14 +12,16 @@
 
 - name: uploading bootstrap systemd.service to remote host servers
   copy:
-    src: /etc/ansible/source/boot.service
+    src: "{{playbook_dir}}/source/boot.service"
     dest: /etc/systemd/system/my-awesome-app.service
     owner: root
     group: root
     mode: 0777
 
 - name: install systemd.service unit file
-  template: src=/etc/ansible/source/boot.service dest=/etc/systemd/system/myservice.service
+  template: 
+    src: "{{playbook_dir}}/source/boot.service"
+    dest: /etc/systemd/system/myservice.service
 
 - name: start systemd.service
   systemd: state=started name=myservice daemon_reload=yes
@@ -33,8 +35,8 @@
 
 - name: Template a j2 file to server
   template:
-    src: /etc/ansible/roles/deploy/templates/boot.j2
-    dest: /etc/ansible/automation/
+    src: "{{playbook_dir}}/roles/base/source/boot.j2"
+    dest: /etc/bin/
     owner: root
     group: root
     mode: '0777'

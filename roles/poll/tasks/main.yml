@@ -31,7 +31,8 @@
     remote_src: yes
 
 - name: install the dependency
-  pip:
+  pip: 
+    executable: pip3
     requirements: /etc/bin/poll/requirements.txt
 
 

@@ -1,5 +1,7 @@
-[web]
+[poll]
 poll ansible_host=root@206.189.125.18 ansible_ssh_pass=tlsehdals1!
+
+[result]
 result ansible_host=root@157.245.38.187 ansible_ssh_pass=tlsehdals1! 
 
 [redis]
