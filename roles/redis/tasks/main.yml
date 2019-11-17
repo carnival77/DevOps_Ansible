@@ -1,5 +1,5 @@
-- name: Install "redis" node.js package.
-  npm:
+- name: Install "redis" 
+  apt:
     name: redis
     path: "{{playbook_dir}}/etc/bin"
 
