@@ -7,22 +7,30 @@
 - hosts: redis
   roles:
     - redis
-  vars:
-    redis_port: 80
-    redis_databases: 1
-
-- hosts: postgresql
-  roles:
-    - postgresql
 
 - hosts: poll
   roles: 
     - poll
 
-- hosts: worker
-  roles:
-    - worker
+# - hosts: redis
+#   roles:
+#     - redis
+#   vars:
+#     redis_port: 80
+#     redis_databases: 1
 
-- hosts: result
-  roles: 
-    - result
+# - hosts: postgresql
+#   roles:
+#     - postgresql
+
+# - hosts: poll
+#   roles: 
+#     - poll
+
+# - hosts: worker
+#   roles:
+#     - worker
+
+# - hosts: result
+#   roles: 
+#     - result

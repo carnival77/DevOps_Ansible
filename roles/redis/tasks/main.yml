@@ -27,7 +27,10 @@
   command: tar zxf /tmp/redis-stable.tar.gz -C /tmp
 
 - name: build redis
-  command: make -C /etc/bin/redis-stable
+  command: make -C /tmp/redis-stable
+  
+# - name: build redis
+#   command: make -C /etc/bin/redis-stable
 
 - name: create redis group
   group: name=redis state=present system=yes
